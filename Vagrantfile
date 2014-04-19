@@ -17,13 +17,13 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "sl6agent" do |sl6client|
-    sl6client.vm.box = "vagrant-sl64-puppet"
-    sl6client.vm.hostname = 'sl6agent'
-    master.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
-    sl6client.vm.network :private_network, ip: "192.168.1.3", virtualbox__intnet: true
+  config.vm.define "rhagent" do |rh|
+    rh.vm.box = "vagrant-sl64-puppet"
+    rh.vm.hostname = 'sl6agent'
+    rh.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
+    rh.vm.network :private_network, ip: "192.168.1.3", virtualbox__intnet: true
 
-    sl6client.vm.provision :puppet do |puppet|
+    rh.vm.provision :puppet do |puppet|
       puppet.manifest_file  = "agent.pp"
       puppet.manifests_path = "vagrant/puppet/manifests"
       puppet.module_path = "vagrant/puppet/modules"
