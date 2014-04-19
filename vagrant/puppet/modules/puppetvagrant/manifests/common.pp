@@ -20,7 +20,7 @@ class common (
   host {
     'puppet':     ip => '192.168.1.2';
     'master':     ip => '192.168.1.2';
-    'sl6agent':   ip => '192.168.1.3';
+    'rh6agent':   ip => '192.168.1.3';
     'sol10agent': ip => '192.168.1.4';
     'sol11agent': ip => '192.168.1.5';
   }
