@@ -1,0 +1,3 @@
+puppetmodule:
+  symlink: "example"
+  repository: "git@github.com:yourname/repo.git"
