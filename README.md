@@ -8,7 +8,6 @@ A puppet vagrant development environment.
 - Add your module to puppet-module.yml
 - Run `rake clone`
 - Start a puppet master and agents
-
    `vagrant up master`
 
    `vagrant up rhagent`
