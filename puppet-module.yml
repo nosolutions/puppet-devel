@@ -1,3 +1,3 @@
 puppetmodule:
-  symlink: "example"
-  repository: "git@github.com:yourname/repo.git"
+  symlink: "sudo"
+  repository: "git@github.com:tosmi/puppet-sudo.git"
