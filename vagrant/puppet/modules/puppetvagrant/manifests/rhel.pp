@@ -43,18 +43,15 @@ class rhel {
 
   package { 'git':
     ensure  => 'latest',
-  #  require => Augeas['yum.conf'],
   }
 
   package { 'vim-enhanced':
     ensure  => 'latest',
-  #  require => Augeas['yum.conf'],
   }
 
   augeas { 'puppetconf':
     context => '/files/etc/puppet/puppet.conf',
     changes => [
-                'set production/modulepath "$confdir/forge:$confdir/modules"',
                 'set agent/server "192.168.1.2"',
                 ],
   }
