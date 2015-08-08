@@ -4,13 +4,19 @@
 Vagrant.configure("2") do |config|
 
 
-  config.vm.define "centos7", primary: true do |master|
-    master.vm.box = "puppetlabs/centos-7.0-64-puppet"
-    master.vm.hostname = 'centos7'
-    master.vm.box_url = "puppetlabs/centos-7.0-64-puppet"
-    master.vm.network "private_network", ip: "192.168.1.2", virtualbox__intnet: true
+  config.vm.define "centos7", primary: true do |centos7|
+    centos7.vm.box = "puppetlabs/centos-7.0-64-puppet"
+    centos7.vm.hostname = 'centos7'
+    centos7.vm.box_url = "puppetlabs/centos-7.0-64-puppet"
+    centos7.vm.network "private_network", ip: "192.168.1.2", virtualbox__intnet: true
 
-    master.vm.provision :puppet do |puppet|
+    centos7.vm.provision :shell do |shell|
+      shell.inline = "mkdir -p /etc/puppet/modules;
+                      puppet module install maestrodev/rvm;
+                      puppet module install saz/sudo"
+    end
+
+    centos7.vm.provision :puppet do |puppet|
       puppet.manifest_file  = "master.pp"
       puppet.manifests_path = "vagrant/puppet/manifests"
       puppet.module_path = "vagrant/puppet/modules"
