@@ -30,6 +30,13 @@ Vagrant.configure("2") do |config|
     centos6.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box"
     centos6.vm.network "private_network", ip: "192.168.1.3"
 
+    centos6.vm.provision :shell do |shell|
+      shell.inline = "mkdir -p /etc/puppet/modules;
+                      puppet module install maestrodev/rvm;
+                      puppet module install saz/sudo"
+    end
+
+
     centos6.vm.provision :puppet do |puppet|
       puppet.manifest_file  = "agent.pp"
       puppet.manifests_path = "vagrant/puppet/manifests"
@@ -38,13 +45,19 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "centos5" do |rh|
-    rh.vm.box = "centos-510-x64-virtualbox-puppet"
-    rh.vm.hostname = 'centos5'
-    rh.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-510-x64-virtualbox-puppet.box"
-    rh.vm.network :private_network, ip: "192.168.1.4", virtualbox__intnet: true
+  config.vm.define "centos5" do |centos5|
+    centos5.vm.box = "centos-510-x64-virtualbox-puppet"
+    centos5.vm.hostname = 'centos5'
+    centos5.vm.box_url = "http://puppet-vagrant-boxes.puppetlabs.com/centos-510-x64-virtualbox-puppet.box"
+    centos5.vm.network :private_network, ip: "192.168.1.4", virtualbox__intnet: true
 
-    rh.vm.provision :puppet do |puppet|
+    centos5.vm.provision :shell do |shell|
+      shell.inline = "mkdir -p /etc/puppet/modules;
+                      puppet module install maestrodev/rvm;
+                      puppet module install saz/sudo"
+    end
+
+    centos5.vm.provision :puppet do |puppet|
       puppet.manifest_file  = "agent.pp"
       puppet.manifests_path = "vagrant/puppet/manifests"
       puppet.module_path = "vagrant/puppet/modules"
