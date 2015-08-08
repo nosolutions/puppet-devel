@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
 
 
-  config.vm.define "master", primary: true do |master|
+  config.vm.define "centos7", primary: true do |master|
     master.vm.box = "puppetlabs/centos-7.0-64-puppet"
     master.vm.hostname = 'centos7'
     master.vm.box_url = "puppetlabs/centos-7.0-64-puppet"
