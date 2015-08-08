@@ -19,48 +19,9 @@ class common (
 
   host {
     'puppet':     ip => '192.168.1.2';
-    'master':     ip => '192.168.1.2';
+    'centos7':     ip => '192.168.1.2';
     'centos6':   ip => '192.168.1.3';
     'centos5':   ip => '192.168.1.4';
-    'sol10agent': ip => '192.168.1.5';
-    'sol11agent': ip => '192.168.1.6';
-  }
-
-  package { 'hiera-puppet-helper':
-    ensure   => 'installed',
-    provider => 'gem',
-    source   => '/vagrant/vagrant/puppet/files/hiera-puppet-helper-1.0.1.gem',
-    require  => File['gemrc'],
-  }
-
-  package { 'rspec':
-    ensure   => 'installed',
-    provider => 'gem',
-    require  => File['gemrc'],
-  }
-
-  package { 'rspec-puppet':
-    ensure   => 'installed',
-    provider => 'gem',
-    require  => File['gemrc'],
-  }
-
-  package { 'puppet-lint':
-    ensure   => 'installed',
-    provider => 'gem',
-    require  => File['gemrc'],
-  }
-
-  package { 'rake':
-    ensure   => 'installed',
-    provider => 'gem',
-    require  => File['gemrc'],
-  }
-
-  package { 'puppetlabs_spec_helper':
-    ensure   => 'installed',
-    provider => 'gem',
-    require  => File['gemrc'],
   }
 
   # copy files
