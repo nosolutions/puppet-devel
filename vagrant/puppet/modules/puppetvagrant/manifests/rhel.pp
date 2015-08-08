@@ -51,16 +51,6 @@ class rhel {
   #  require => Augeas['yum.conf'],
   }
 
-  package { 'puppet':
-    ensure   => '3.2.4-1.el6',
-  #  require => Augeas['yum.conf']
-  }
-
-  package { 'hiera':
-    ensure  => '1.3.2-1.el6',
-  #  require => Augeas['yum.conf']
-  }
-
   augeas { 'puppetconf':
     context => '/files/etc/puppet/puppet.conf',
     changes => [
