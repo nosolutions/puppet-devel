@@ -9,7 +9,6 @@ class puppetmaster {
                 'set master/dns_alt_names "vagrant-rh6,192.168.1.2"',
                 'set master/autosign "true"',
                 ],
-    require => Package['puppet']
   }
 
   # exec { 'puppet master --daemonize --debug':
