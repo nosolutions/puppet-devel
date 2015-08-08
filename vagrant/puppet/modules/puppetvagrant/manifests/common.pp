@@ -24,29 +24,6 @@ class common (
     'centos5':   ip => '192.168.1.4';
   }
 
-  # copy files
-  #
-  file { 'vagrantbashrc':
-    path   => "${real_vagrant_home}/.bashrc",
-    source => '/vagrant/vagrant/puppet/files/bashrc',
-    owner  => 'vagrant',
-    group  => 'vagrant',
-  }
-
-  file { 'bashrc':
-    path   => "${real_root_home}/.bashrc",
-    source => '/vagrant/vagrant/puppet/files/bashrc',
-    owner  => 'root',
-    group  => 'root',
-  }
-
-  file { 'gemrc':
-    path   => '/etc/gemrc',
-    source => '/vagrant/vagrant/puppet/files/gemrc',
-    owner  => 'root',
-    group  => 'root',
-  }
-
   # hiera config template files,
   # maybe used for testing hiera
   #
@@ -66,12 +43,6 @@ class common (
     source => '/vagrant/vagrant/puppet/files/puppet.conf',
     owner  => 'root',
     group  => 'root',
-  }
-
-  file { '/etc/puppet/modules':
-    ensure => 'link',
-    target => '/vagrant/fixtures/modules',
-    force  => true,
   }
 
   file { '/var/lib/hiera/defaults.yaml':
