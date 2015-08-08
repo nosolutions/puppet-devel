@@ -31,7 +31,6 @@ class puppetvagrant::rvm {
   'ruby-2.1.6@puppet/bundler':
     ensure  => 'latest',
     require => Rvm_gemset['ruby-2.1.6@puppet'],
-    proxy_url => "http://${::http_proxy}"
   }
 
   file_line { 'rvm use puppet':
