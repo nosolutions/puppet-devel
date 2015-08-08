@@ -1,0 +1,5 @@
+---
+gem: --no-ri --no-rdoc <% if @http_proxy %>--http-proxy=http://<%= @http_proxy %> <% end  %>
+<% if @http_proxy %>
+http_proxy: http://<%= @http_proxy %>
+<% end %>
