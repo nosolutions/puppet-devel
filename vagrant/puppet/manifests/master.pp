@@ -12,10 +12,10 @@ class puppetmaster {
     require => Package['puppet']
   }
 
-  exec { 'puppet master --daemonize --debug':
-    path    => ['/usr/bin', ],
-    require => Augeas['master_puppetconf']
-  }
+  # exec { 'puppet master --daemonize --debug':
+  #   path    => ['/usr/bin', ],
+  #   require => Augeas['master_puppetconf']
+  # }
 }
 
 include puppetmaster
