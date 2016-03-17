@@ -1,3 +1,0 @@
-puppetmodule:
-  symlink: "sudo"
-  repository: "git@github.com:tosmi/puppet-sudo.git"
