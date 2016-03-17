@@ -1,0 +1,38 @@
+# .bash_profile
+
+# Get the aliases and functions
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+function grake() {
+  echo 'calling rake in /vagrant'
+  echo
+  (cd /vagrant; rake "$@")
+}
+
+# User specific environment and startup programs
+rvm use puppet
+
+export rvmsudo_secure_path=1
+alias root='rvmsudo /bin/bash -i'
+alias v='cd /vagrant'
+
+export PATH=/vagrant/bin:$PATH:$HOME/.local/bin:$HOME/bin
+
+source ~/.rake-completion.bash
+source ~/.git-completion.bash
+source ~/.git-prompt.sh
+
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+# GIT_PS1_SHOWUPSTREAM="auto"
+GIT_PS1_SHOWCOLORHINTS=1
+PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
+
+echo
+echo 'changing directory to /vagrant'
+cd /vagrant
+
+echo
+echo 'you can always use the alias v to change back to /vagrant'

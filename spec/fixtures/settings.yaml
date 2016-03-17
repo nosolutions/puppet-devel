@@ -1,0 +1,13 @@
+---
+settings:
+  puppet_version: '3.7.4'
+  site_repository: "ssh://git@localhost:9418/puppet/puppet.git"
+  http_proxy: ""
+  reaktor_uri: 'http://localhost:4570/gitlab_payload'
+  default_gitlab_group: '-puppetmodules'
+  default_gitlab_host: 'localhost'
+  default_gitlab_port: 443
+  default_gitlab_ssh_port: 9418
+  default_jenkins_host: 'localhost'
+  default_jenkins_port: 80
+  default_jenkins_user: 'jenkins'

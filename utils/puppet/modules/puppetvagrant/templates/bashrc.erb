@@ -1,0 +1,18 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+PATH=/vagrant/bin:$PATH
+
+<%- if @http_proxy && !@http_proxy.empty? -%>
+http_proxy=http://<%= @http_proxy%>
+https_proxy=$http_proxy
+export http_proxy https_proxy
+<%- end -%>

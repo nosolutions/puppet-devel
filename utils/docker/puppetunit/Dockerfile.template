@@ -1,0 +1,44 @@
+# !!! IMPORTANT !!!
+#
+# if you need to use a http(s)_proxy use this Dockerfile as follows:
+#
+# $ export http_proxy=http://proxy:port/
+# $ export https_proxy=$http_proxy
+# $ cat Dockerfile | envsubst | docker build -t="name" -
+
+FROM centos:7.1.1503
+MAINTAINER Toni Schmidbauer "toni@stderr.at"
+ENV REFRESHED_AT 2015-06-02
+
+ENV http_proxy $http_proxy
+ENV https_proxy $https_proxy
+
+RUN yum -q makecache && yum install -y -q sudo git tar
+
+RUN gpg --keyserver hkp://keys.gnupg.net --keyserver-options http_proxy="$http_proxy" --recv-keys D39DC0E3
+
+RUN useradd -u $puppet_uid -ms /bin/bash puppet
+ADD id_rsa /home/puppet/.ssh/id_rsa
+RUN chmod 700 /home/puppet/.ssh/ && chmod 600 /home/puppet/.ssh/id_rsa && chown -R puppet:puppet /home/puppet/.ssh
+
+RUN echo 'puppet ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN echo 'Defaults:puppet !requiretty'  >> /etc/sudoers
+RUN echo 'Defaults env_keep += "ftp_proxy http_proxy https_proxy no_proxy"' >> /etc/sudoers
+
+USER puppet
+RUN gpg --keyserver hkp://keys.gnupg.net --keyserver-options http_proxy="$http_proxy" --recv-keys D39DC0E3
+RUN /bin/bash -l -c "curl -L get.rvm.io | bash -s stable"
+RUN /bin/bash -l -c "rvm install 2.1.6"
+RUN /bin/bash -l -c "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
+
+RUN /bin/bash -l -c "rvm gemset create puppet"
+RUN echo 'source ~/.rvm/scripts/rvm; rvm use ruby-2.1.6@puppet' >> /home/puppet/.bashrc
+RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+
+ADD Gemfile /home/puppet/Gemfile
+RUN /bin/bash -l -c "cd; bundle install --without='test'"
+
+RUN /bin/bash -l -c "cd; ssh-keyscan -p 9418 localhost >> /home/puppet/.ssh/known_hosts"
+RUN /bin/bash -l -c "cd; ssh-keyscan -p 9418 127.0.0.1    >> /home/puppet/.ssh/known_hosts"
+
+ONBUILD ENV USER puppet

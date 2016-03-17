@@ -1,0 +1,7 @@
+---
+<%- if @http_proxy && !@http_proxy.empty? -%>
+  gem: --no-ri --no-rdoc --http-proxy=http://<%= @http_proxy %>
+  http_proxy: http://<%= @http_proxy %>
+<%- else -%>
+  gem: --no-ri --no-rdoc
+<%- end -%>
