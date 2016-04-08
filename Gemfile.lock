@@ -1,29 +1,25 @@
-GIT
-  remote: https://github.com/NARKOZ/gitlab.git
-  revision: bbb8b61db46b32b8649956cb81d9a41e132493d4
-  ref: bbb8b61
-  specs:
-    gitlab (3.4.0)
-      httparty
-      terminal-table
-
 GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.2.8)
-    ast (2.1.0)
-    astrolabe (1.3.1)
-      parser (~> 2.2)
-    coderay (1.1.0)
+    ansi (1.5.0)
+    ast (2.2.0)
+    coderay (1.1.1)
     colorize (0.7.7)
     diff-lcs (1.2.5)
     docile (1.1.5)
-    domain_name (0.5.25)
+    domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
-    facter (2.4.4)
+    facter (2.4.6)
       CFPropertyList (~> 2.2.6)
+    facterdb (0.3.3)
+      facter
+      jgrep
     ffi (1.9.10)
     formatador (0.2.5)
+    gitlab (3.6.1)
+      httparty
+      terminal-table
     guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
@@ -41,52 +37,58 @@ GEM
     hirb (0.7.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
-    httparty (0.13.5)
+    httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    jenkins_api_client (1.4.0)
+    jenkins_api_client (1.4.2)
       json
       mixlib-shellout (>= 1.1.0)
       nokogiri (~> 1.6.0)
       terminal-table (>= 1.4.0)
       thor (>= 0.16.0)
+    jgrep (1.4.0)
+      json
     json (1.8.3)
-    json_pure (1.8.2)
-    listen (3.0.3)
+    json_pure (1.8.3)
+    listen (3.0.6)
       rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-    lumberjack (1.0.9)
+      rb-inotify (>= 0.9.7)
+    lumberjack (1.0.10)
+    mcollective-client (2.8.4)
+      json
+      stomp
+      systemu
     metaclass (0.0.4)
-    metadata-json-lint (0.0.6)
+    metadata-json-lint (0.0.11)
       json
       spdx-licenses (~> 1.0)
     method_source (0.8.2)
-    mime-types (2.6.2)
-    mini_portile (0.6.2)
-    mixlib-shellout (2.1.0)
+    mime-types (2.99.1)
+    mini_portile2 (2.0.0)
+    mixlib-shellout (2.2.6)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
-    nenv (0.2.0)
+    nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.2)
+    net-ssh (3.1.1)
     net-telnet (0.1.1)
-    netrc (0.10.3)
-    nokogiri (1.6.6.2)
-      mini_portile (~> 0.6.0)
+    netrc (0.11.0)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    parser (2.2.3.0)
-      ast (>= 1.1, < 3.0)
+    parser (2.3.0.7)
+      ast (~> 2.2)
     powerpack (0.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puppet (3.7.4)
+    puppet (3.8.6)
       facter (> 1.6, < 3)
       hiera (~> 1.0)
       json_pure
@@ -104,50 +106,53 @@ GEM
       puppet-lint (~> 1.0)
     puppet-lint-version_comparison-check (0.1.2)
       puppet-lint (~> 1.0)
-    puppet-syntax (2.0.0)
+    puppet-syntax (2.1.0)
       rake
-    puppetlabs_spec_helper (0.10.3)
+    puppetlabs_spec_helper (1.1.1)
       mocha
       puppet-lint
       puppet-syntax
       rake
       rspec-puppet
-    rainbow (2.0.0)
-    rake (10.1.0)
-    rb-fsevent (0.9.6)
-    rb-inotify (0.9.5)
+    rainbow (2.1.0)
+    rake (11.1.2)
+    rb-fsevent (0.9.7)
+    rb-inotify (0.9.7)
       ffi (>= 0.5.0)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rspec (3.2.0)
-      rspec-core (~> 3.2.0)
-      rspec-expectations (~> 3.2.0)
-      rspec-mocks (~> 3.2.0)
-    rspec-core (3.2.3)
-      rspec-support (~> 3.2.0)
-    rspec-expectations (3.2.1)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
+      rspec-support (~> 3.4.0)
     rspec-its (1.2.0)
       rspec-core (>= 3.0.0)
       rspec-expectations (>= 3.0.0)
-    rspec-mocks (3.2.1)
+    rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.2.0)
-    rspec-puppet (2.2.0)
+      rspec-support (~> 3.4.0)
+    rspec-puppet (2.4.0)
       rspec
-    rspec-puppet-facts (0.11.0)
+    rspec-puppet-facts (1.5.0)
       facter
+      facterdb (>= 0.3.0)
       json
-    rspec-support (3.2.2)
-    rubocop (0.33.0)
-      astrolabe (~> 1.3)
-      parser (>= 2.2.2.5, < 3.0)
+      mcollective-client
+      puppet
+    rspec-support (3.4.1)
+    rubocop (0.39.0)
+      parser (>= 2.3.0.7, < 3.0)
       powerpack (~> 0.1)
       rainbow (>= 1.99.1, < 3.0)
-      ruby-progressbar (~> 1.4)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.7.5)
     serverspec (2.22.0)
       multi_json
@@ -156,39 +161,42 @@ GEM
       specinfra (~> 2.42)
     sfl (2.2)
     shellany (0.0.1)
-    simplecov (0.10.0)
+    simplecov (0.11.2)
       docile (~> 1.1.0)
       json (~> 1.8)
       simplecov-html (~> 0.10.0)
-    simplecov-console (0.2.0)
-      colorize
+    simplecov-console (0.3.0)
+      ansi
       hirb
       simplecov
     simplecov-html (0.10.0)
     slop (3.6.0)
     spdx-licenses (1.0.0)
       json
-    specinfra (2.42.2)
+    specinfra (2.56.0)
       net-scp
-      net-ssh (~> 2.7)
+      net-ssh (>= 2.7, < 4.0)
       net-telnet
       sfl
+    stomp (1.3.5)
+    systemu (2.6.5)
     terminal-table (1.5.2)
     thor (0.19.1)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.1)
+    unf_ext (0.0.7.2)
+    unicode-display_width (1.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   colorize (~> 0.7.7)
-  gitlab!
+  gitlab (~> 3.6)
   guard-rake
   jenkins_api_client (~> 1.4)
   metadata-json-lint (~> 0.0.6)
-  puppet (~> 3.7.0)
+  puppet (~> 3.8.0)
   puppet-blacksmith
   puppet-lint (~> 1.1.0)
   puppet-lint-absolute_classname-check
@@ -196,15 +204,15 @@ DEPENDENCIES
   puppet-lint-leading_zero-check
   puppet-lint-trailing_comma-check
   puppet-lint-version_comparison-check
-  puppetlabs_spec_helper (~> 0.10)
+  puppetlabs_spec_helper (~> 1.1.1)
   rake
-  rspec-core (~> 3.2.0)
-  rspec-puppet (~> 2.2.0)
-  rspec-puppet-facts (~> 0.11.0)
-  rubocop (= 0.33.0)
+  rspec-core (~> 3.4.0)
+  rspec-puppet (~> 2.4.0)
+  rspec-puppet-facts (~> 1.5.0)
+  rubocop (= 0.39.0)
   serverspec (~> 2.22.0)
-  simplecov (~> 0.10.0)
-  simplecov-console (~> 0.2.0)
+  simplecov (~> 0.11.0)
+  simplecov-console (~> 0.3.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
