@@ -1,5 +1,5 @@
 class puppetvagrant::setup {
-  if $::http_proxy {
+  if $::http_proxy and $::http_proxy != "" {
     Exec {
       environment => ["http_proxy=http://${::http_proxy}", "https_proxy=http://${::http_proxy}"],
     }

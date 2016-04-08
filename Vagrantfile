@@ -5,23 +5,25 @@ Vagrant.require_version ">= 1.7.4"
 
 $:.unshift File.dirname(__FILE__) + '/lib'
 
+require 'erb'
 require 'puppetdevel/settings'
 
-$PUPPETMODULES = """
+module_install_template = <<eos
 mkdir -p /etc/puppet/modules;
+<% if not SETTINGS.http_proxy.empty? %>
 export http_proxy=http://#{SETTINGS.http_proxy} \
 export https_proxy=http://#{SETTINGS.http_proxy};
-puppet module --modulepath=/etc/puppet/modules install maestrodev/rvm;
-puppet module --modulepath=/etc/puppet/modules install saz/sudo
-"""
+<% end %>
+<% @puppetmodules.each do |mod| %>
+puppet module --modulepath=/etc/puppet/modules install <%= mod %>
+<% end %>
+eos
 
-$PUPPETMODULES_DEVEL = """
-mkdir -p /etc/puppet/modules;
-export http_proxy=http://#{SETTINGS.http_proxy} \
-export https_proxy=http://#{SETTINGS.http_proxy};
-puppet module --modulepath=/etc/puppet/modules install vshn/gitlab;
-puppet module --modulepath=/etc/puppet/modules install rtyler/jenkins
-"""
+@puppetmodules = ['maestrodev/rvm', 'saz/sudo']
+@install_modules = ERB.new(module_install_template).result()
+
+@puppetmodules = ['vshn/gitlab', 'rtyler/jenkins']
+@dev_install_modules = ERB.new(module_install_template).result()
 
 $FACTER_SETTINGS = {
   'http_proxy' => SETTINGS.http_proxy,
@@ -30,7 +32,7 @@ $FACTER_SETTINGS = {
 
 def configure_provisioners(config)
   config.vm.provision "gitconfig", type: :file, source: "~/.gitconfig", destination: ".gitconfig"  if File.exists? ENV['HOME'] + '/.gitconfig'
-  config.vm.provision "puppetmodules", type: :shell, inline: $PUPPETMODULES
+  config.vm.provision "puppetmodules", type: :shell, inline: @install_modules
   config.vm.provision "basic", type: :puppet do |puppet|
     puppet.facter = $FACTER_SETTINGS
     puppet.manifests_path = "utils/puppet/manifests"
@@ -61,7 +63,7 @@ Vagrant.configure("2") do |config|
       config.vm.network "forwarded_port", host_ip: '127.0.0.1', guest: 443,   host: 8081, auto_correct: true
       config.vm.network "forwarded_port", host_ip: '127.0.0.1', guest: 8081, host: 8082, auto_correct: true
       centos7.vm.provision "puppetmodules_devel", type:  :shell do |shell|
-        shell.inline = $PUPPETMODULES_DEVEL
+        shell.inline = @dev_install_modules
       end
       centos7.vm.provision "testing", type: :puppet do |puppet|
         puppet.facter = $FACTER_SETTINGS

@@ -1,43 +1,47 @@
 # install and configure rvm
 #
 class puppetvagrant::rvm {
-  class { '::rvm':
-    proxy_url    => $::http_proxy
-  }
+  contain ::rvm
 
-  if $::http_proxy {
+  $ruby_version = '2.1.8'
+
+  if $::http_proxy and $::http_proxy != "" {
     Rvm_gem {
       proxy_url => "http://${::http_proxy}"
+    }
+
+    Class['::rvm'] {
+      proxy_url => $http_proxy
     }
   }
 
   rvm::system_user { 'vagrant': }
 
   rvm_system_ruby {
-    'ruby-2.1.6':
+    "ruby-${ruby_version}":
       ensure      => 'present',
   }
 
   rvm_gemset {
-    'ruby-2.1.6@puppet':
+    "ruby-${ruby_version}@puppet":
       ensure  => present,
-      require => Rvm_system_ruby['ruby-2.1.6'];
+      require => Rvm_system_ruby["ruby-${ruby_version}"];
   }
 
   rvm_alias {
     'puppet':
       ensure      => present,
-      target_ruby => 'ruby-2.1.6@puppet',
-      require     => Rvm_gemset['ruby-2.1.6@puppet'];
+      target_ruby => "ruby-${ruby_version}@puppet",
+      require     => Rvm_gemset["ruby-${ruby_version}@puppet"];
   }
 
   file { ['/etc/gemrc', '/home/vagrant/.gemrc', '/root/.gemrc']:
       ensure  =>  file,
       content => template('puppetvagrant/gemrc.erb')
   } ->
-  rvm_gem { 'ruby-2.1.6@puppet/bundler':
+  rvm_gem { "ruby-${ruby_version}@puppet/bundler":
     ensure  => 'latest',
-    require => Rvm_gemset['ruby-2.1.6@puppet'],
+    require => Rvm_gemset["ruby-${ruby_version}@puppet"],
   }
 
   file_line { 'ignore_project_rvmrc':
