@@ -1,7 +1,10 @@
 # install and configure rvm
 #
 class puppetvagrant::rvm {
-  contain ::rvm
+
+  class { '::rvm':
+    key_server => 'hkp://pgp.mit.edu'
+  }
 
   $ruby_version = '2.1.8'
 
