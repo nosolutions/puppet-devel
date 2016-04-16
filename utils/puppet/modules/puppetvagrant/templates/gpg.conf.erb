@@ -1,0 +1,5 @@
+require-cross-certification
+keyserver hkp://pgp.mit.edu
+<%- if not scope['::http_proxy'].nil? and not scope['::http_proxy'].empty? %>
+keyserver-options http-proxy=<%= scope['::http_proxy'] %>
+<%- end %>

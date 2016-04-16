@@ -7,16 +7,6 @@ class puppetvagrant::proxy {
       line   => "proxy=http://${::http_proxy}"
     }
 
-    exec { 'create_gpgconf':
-      command => 'gpg -k',
-      path    => '/usr/bin:/bin',
-    } ->
-    file_line { 'gpg_conf':
-      ensure => present,
-      path   => '/root/.gnupg/gpg.conf',
-      line   => "keyserver-options http-proxy=${::http_proxy}"
-    }
-
     file { '/root/.curlrc':
       ensure => present,
     } ->
