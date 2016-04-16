@@ -10,3 +10,4 @@
 /.rake_t_cache
 /control-repo/
 /hiera-data/
+/modules/*
