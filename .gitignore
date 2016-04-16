@@ -1,6 +1,5 @@
 /.vagrant/
 /site/
-/modules/**/*
 /.user_settings.yaml
 /.bundle/
 /utils/docker/puppetunit/Dockerfile
