@@ -1,7 +1,7 @@
 ---
 modules:
 settings:
-  puppet_version: '3.7.4'
+  puppet_version: '3.8.6'
   site_repository: "ssh://git@localhost:9418/puppet/puppet.git"
   control_repository: "ssh://git@localhost:9418/puppet/control-repo.git"
   hiera_repository: "ssh://git@locahost:9418/puppet/hiera-data.git"
