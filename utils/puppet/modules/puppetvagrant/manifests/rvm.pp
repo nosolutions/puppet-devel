@@ -6,7 +6,7 @@ class puppetvagrant::rvm {
     key_server => 'hkp://pgp.mit.edu'
   }
 
-  $ruby_version = '2.1.8'
+  $ruby_version = '2.1.10'
 
   if $::http_proxy and $::http_proxy != "" {
     Rvm_gem {
