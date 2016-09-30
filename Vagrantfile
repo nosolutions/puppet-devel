@@ -49,8 +49,8 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
 
   config.vm.define "centos7", primary: true do |centos7|
-    centos7.vm.box_version = '= 1.0.2'
-    centos7.vm.box = "puppetlabs/centos-7.0-64-puppet"
+    centos7.vm.box_version = '= 1.0.1'
+    centos7.vm.box = "puppetlabs/centos-7.2-64-puppet"
     centos7.vm.hostname = 'centos7'
 
     configure_provisioners(centos7)
